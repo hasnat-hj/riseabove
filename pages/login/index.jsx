@@ -45,7 +45,7 @@ const Login = () => {
             <Link href="/">
               <a className="relative inline-block py-36">
                 <img
-                  src="/images/logo_white.png"
+                  src="/images/logo.png"
                   className="inline-block max-h-7"
                   alt="Blenny | NFT Marketplace"
                 />

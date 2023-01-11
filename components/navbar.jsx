@@ -80,7 +80,7 @@ const Navbar = () => {
                         alt="Blenny | NFT Marketplace"
                       />
                       <img
-                        src="/images/logo_white.png"
+                        src="/images/logo.png"
                         className="hidden max-h-16 dark:block"
                         alt="Blenny | NFT Marketplace"
                       />
@@ -110,7 +110,7 @@ const Navbar = () => {
                 <Link href="/">
                   <a className="shrink-0 hidden dark:block">
                     <img
-                      src="/images/logo_white.png"
+                      src="/images/logo.png"
                       className="max-h-16 h-auto"
                       alt="Blenny | NFT Marketplace"
                     />
@@ -222,7 +222,7 @@ const Navbar = () => {
                   <Link href="/">
                     <a className="shrink-0 lg:mr-14">
                       <img src="/images/logo.png" className="max-h-7 dark:hidden" alt="Blenny | NFT Marketplace" />
-                      <img src="/images/logo_white.png" className="hidden max-h-16 dark:block" alt="Blenny | NFT Marketplace" />
+                      <img src="/images/logo.png" className="hidden max-h-16 dark:block" alt="Blenny | NFT Marketplace" />
                     </a>
                   </Link>
 
@@ -243,13 +243,13 @@ const Navbar = () => {
                       <a className="shrink-0">
                         {/* <img src="/images/logo.png" alt="" className="max-h-7 h-auto dark:hidden" /> */}
 
-                        <img src="/images/logo_white.png" className="max-h-16 h-auto" alt="Blenny | NFT Marketplace" />
+                        <img src="/images/logo.png" className="max-h-16 h-auto" alt="Blenny | NFT Marketplace" />
                       </a>
                     </Link> : <Link href="/">
                       <a className="shrink-0">
                         <img src="/images/logo.png" alt="Bleeny" className="max-h-16 h-auto dark:hidden" />
 
-                        <img src="/images/logo_white.png" className="max-h-16 h-auto hidden dark:block" alt="Bleeny | NFT Marketplace" />
+                        <img src="/images/logo.png" className="max-h-16 h-auto hidden dark:block" alt="Bleeny | NFT Marketplace" />
                       </a>
                     </Link>}
 

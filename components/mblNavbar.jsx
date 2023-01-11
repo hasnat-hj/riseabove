@@ -310,7 +310,7 @@ const MblNavbar = ({ theme }) => {
             <img src="/logo1" className="max-h-7 dark:hidden" alt="Blenny | NFT Marketplace" />
 
             <img
-              src="/images/logo_white.png"
+              src="/images/logo.png"
               alt="Blenny | NFT Marketplace"
               className="max-h-7 dark:block hidden"
             />
