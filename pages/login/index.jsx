@@ -13,24 +13,14 @@ const Login = () => {
   const tabItem = [
     {
       id: 1,
-      text: "Ethereum",
-      icon: "ETH"
-    },
-    {
-      id: 2,
-      text: "Torus",
-      icon: "torus"
-    },
-    {
-      id: 4,
-      text: "Mobile Wallet",
-      icon: "mbl-wallet"
+      text: "MetaMask",
+      icon: "MTC"
     }
   ];
 
   return (
     <div>
-      <Meta title="Login || Riseabove | NFT Marketplace Next.js Template" />
+      <Meta title="Login || Blenny | NFT Marketplace Next.js Template" />
       {/* <!-- Login --> */}
       <section className="relative h-screen">
         <div className="lg:flex lg:h-full">
@@ -45,7 +35,7 @@ const Login = () => {
             <Link href="/">
               <a className="relative inline-block py-36">
                 <img
-                  src="/images/logo.png"
+                  src="/images/logo_white.png"
                   className="inline-block max-h-7"
                   alt="Blenny | NFT Marketplace"
                 />
@@ -109,23 +99,7 @@ const Login = () => {
                   <div className="tab-pane fade show active">
                     <Metamask_comp_login />
 
-                    <button className="dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 dark:hover:bg-accent hover:bg-accent text-jacarta-700 mb-4 flex w-full items-center justify-center rounded-full border-2 bg-white py-4 px-8 text-center font-semibold transition-all hover:border-transparent hover:text-white dark:text-white dark:hover:border-transparent">
-                      <img
-                        src="/images/wallets/torus_24.svg"
-                        className="mr-2.5 inline-block h-6 w-6"
-                        alt=""
-                      />
-                      <span>Torus</span>
-                    </button>
-
-                    <button className="dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 dark:hover:bg-accent hover:bg-accent text-jacarta-700 mb-4 flex w-full items-center justify-center rounded-full border-2 bg-white py-4 px-8 text-center font-semibold transition-all hover:border-transparent hover:text-white dark:text-white dark:hover:border-transparent">
-                      <img
-                        src="/images/wallets/wallet_connect_24.svg"
-                        className="mr-2.5 inline-block h-6 w-6"
-                        alt=""
-                      />
-                      <span>Mobile Wallet</span>
-                    </button>
+                   
 
                     <button className="dark:bg-jacarta-700 dark:border-jacarta-600 border-jacarta-100 dark:hover:bg-accent hover:bg-accent text-jacarta-700 mb-4 flex w-full items-center justify-center rounded-full border-2 bg-white py-4 px-8 text-center font-semibold transition-all hover:border-transparent hover:text-white dark:text-white dark:hover:border-transparent">
                       <span>Show more options</span>

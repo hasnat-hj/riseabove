@@ -12,7 +12,7 @@ const initialState = {
   filteredRenkingData: [],
   walletModal: false,
   bidsModal: false,
-  itemId:"",
+  bidItem:{},
   buyModal: false,
   propartiesModalValue: false,
   trendingCategorySorText: "",
@@ -52,17 +52,18 @@ export const counterSlice = createSlice({
     walletModalShow: (state) => {
       state.walletModal = true;
     },
-    walletModalhide: (state,payload) => {
+    walletModalhide: (state) => {
       state.walletModal = false;
-      state.itemId=payload
     },
-    bidsModalShow: (state) => {
+    bidsModalShow: (state,payload) => {
       state.bidsModal = true;
+      state.bidItem = payload.payload;
     },
 
     setCategoryItem: (state, payload) => {
       state.categoryItemstate = payload;
     },
+    
 
     bidsModalHide: (state) => {
       state.bidsModal = false;

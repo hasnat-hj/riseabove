@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import OfferTab from './OfferTab';
 import Properties from './Properties';
 import Activity_tab from './Activity_tab';
 import Price_history from './Price_history';
 import 'react-tabs/style/react-tabs.css';
+import axiosInstance from '../../utils/axiosInterceptor';
 
-const ItemsTabs = () => {
+const ItemsTabs = ({item}) => {
 	const [tabsActive, setTabsActive] = useState(1);
 	const tabsHeadText = [
 		{
@@ -35,6 +36,26 @@ const ItemsTabs = () => {
 			icon: 'price',
 		},
 	];
+
+const [offers,setOffers]=useState()
+
+useEffect(() => {
+ if(item._id){
+
+ 
+(async()=>{
+const result=await axiosInstance.get(`/Anft/getAuctionOffers/${item._id}`)
+console.log(result.data)
+if(result.status==200)
+        setOffers(result.data)
+
+})()
+ }
+ 
+}, [item]);
+
+if(!item)
+return
 	return (
 		<>
 			<div className="scrollbar-custom mt-14 overflow-x-auto rounded-lg">
@@ -64,7 +85,7 @@ const ItemsTabs = () => {
 					</TabList>
 
 					<TabPanel className="tab-content">
-						<OfferTab />
+						<OfferTab offers={offers} item={item}/>
 					</TabPanel>
 					<TabPanel>
 						<Properties />

@@ -79,17 +79,11 @@ const Edit_user = () => {
 			});
 			
 			if (res.data.user?.coverImage) {
-				const base64String = btoa(
-					String.fromCharCode(...new Uint8Array(res.data.user.coverImage.data.data))
-				  );
-				setCoverPreview(`data:image/png;base64,${base64String}`);
+				setCoverPreview(res.data.user?.coverImage);
 			}
 			if (res.data.user?.profileImage) {
-				const base64String = btoa(
-					String.fromCharCode(...new Uint8Array(res.data.user.profileImage.data.data))
-				  );
 				
-				setPreview(`data:image/png;base64,${base64String}`);
+				setPreview(res.data.user?.profileImage);
 			}
         })
         .catch(err => console.log(err));
@@ -167,7 +161,7 @@ const Edit_user = () => {
   return (
     <div>
       <form onSubmit={e => handleProfile(e)}>
-        <Meta title="Profile || Riseabove | NFT Marketplace Next.js Template" />
+        <Meta title="Profile || Blenny | NFT Marketplace Next.js Template" />
         <div className="pt-[5.5rem] lg:pt-24">
           {/* <!-- Banner --> */}
           <div className="relative">
@@ -362,7 +356,7 @@ const Edit_user = () => {
                 <div className="flex space-x-5 md:w-1/2 md:pl-8">
                   <div className="shrink-0">
                     <figure className="relative inline-block">
-                      <Image
+                      <img
                         src={preview ? preview : "/images/user/user_avatar.gif"}
                         alt="collection avatar"
                         className="dark:border-jacarta-600 rounded-xl border-[5px] border-white"

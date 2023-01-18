@@ -310,7 +310,7 @@ const MblNavbar = ({ theme }) => {
             <img src="/logo1" className="max-h-7 dark:hidden" alt="Blenny | NFT Marketplace" />
 
             <img
-              src="/images/logo.png"
+              src="/images/logo_white.png"
               alt="Blenny | NFT Marketplace"
               className="max-h-7 dark:block hidden"
             />
@@ -379,7 +379,7 @@ const MblNavbar = ({ theme }) => {
               </a>
             </Link>
           </li>
-            <li className="group">
+       {!loggedin&&     <li className="group">
             <Link href="/login">
               <a
                 onClick={() => {
@@ -398,7 +398,7 @@ const MblNavbar = ({ theme }) => {
                 </button>
               </a>
             </Link>
-          </li>
+          </li>}
           <li className="js-nav-dropdown nav-item dropdown group relative">
             <button
               className={

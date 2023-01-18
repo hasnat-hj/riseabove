@@ -121,9 +121,7 @@ const Top_collection = () => {
 						{data&&data.map((item,index) => {
 							const { id, profileImage, username,  balance, address } = item;
 							const itemLink = address;
-if(profileImage){const userImage= btoa(
-	String.fromCharCode(...new Uint8Array(profileImage.data.data))
-  );}
+
 							return (
 								<div
 									className="border-jacarta-100 dark:bg-jacarta-700 rounded-2xl flex border bg-white py-4 px-7 transition-shadow hover:shadow-lg dark:border-transparent"
@@ -133,13 +131,13 @@ if(profileImage){const userImage= btoa(
 										<Link href={'/collection/' + itemLink}>
 											<a className="relative block">
 												{/* <img src={image} alt={title} className="rounded-2lg" /> */}
-											{	<Image
-													src={`data:image/png;base64,${profileImage&&userImage}`}
+												<img
+													src={profileImage?profileImage:"/images/user/user_avatar.gif"}
 													className="rounded-2lg"
 													height={48}
 													width={48}
-													objectFit="cover"
-												/>}
+													style={{width:48,height:48,objectFit:"cover"}}
+												/>
 												<div className="dark:border-jacarta-600 bg-jacarta-700 absolute -left-3 top-1/2 flex h-6 w-6 -translate-y-2/4 items-center justify-center rounded-full border-2 border-white text-xs text-white">
 													{index+1}
 												</div>

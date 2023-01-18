@@ -1,8 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
-import { items_offer_data } from '../../data/items_tabs_data';
+// import { items_offer_data } from '../../data/items_tabs_data';
 
-const OfferTab = () => {
+const OfferTab = ({item:bidItem,offers}) => {
+	console.log(offers)
+	if(!offers)
+	return
 	return (
 		<>
 			{/* <!-- Offers --> */}
@@ -58,8 +61,8 @@ const OfferTab = () => {
 							</span>
 						</div>
 					</div>
-					{items_offer_data.map((item) => {
-						const { ethPrice, id, usdPrice, difference, Expiration, user } = item;
+					{offers.map((item) => {
+						const { bid, id, created_at, user } = item;
 						return (
 							<div className="contents" role="row" key={id}>
 								<div
@@ -72,33 +75,33 @@ const OfferTab = () => {
 										</svg>
 									</span>
 									<span className="text-green text-sm font-medium tracking-tight">
-										{ethPrice} ETH
+										{bid} MTC
 									</span>
 								</div>
 								<div
 									className="dark:border-jacarta-600 border-jacarta-100 flex items-center border-t py-4 px-4"
 									role="cell"
 								>
-									{usdPrice}
+									{bid*2000}
 								</div>
 								<div
 									className="dark:border-jacarta-600 border-jacarta-100 flex items-center border-t py-4 px-4"
 									role="cell"
 								>
-									{difference} below
+									{Math.floor((bid/bidItem.minbid)*100)}% {bid<bidItem.minbid? "Below":"Above"}
 								</div>
 								<div
 									className="dark:border-jacarta-600 border-jacarta-100 flex items-center border-t py-4 px-4"
 									role="cell"
 								>
-									in {Expiration} months
+									in 2 months
 								</div>
 								<div
 									className="dark:border-jacarta-600 border-jacarta-100 flex items-center border-t py-4 px-4"
 									role="cell"
 								>
 									<Link href="#">
-										<a className="text-accent">{user}</a>
+										<a className="text-accent">{user.username}</a>
 									</Link>
 								</div>
 							</div>
