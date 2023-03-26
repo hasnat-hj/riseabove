@@ -8,8 +8,10 @@ import btoa from 'btoa';
 import { loadContracts } from '../../contractABI/interact.js';
 import { buyModalHide } from '../../redux/counterSlice';
 import axiosInstance from '../../utils/axiosInterceptor';
+import { useRouter } from 'next/router.js';
 
 const BuyModal = () => {
+  const router = useRouter();
   const { buyModal, categoryItemstate } = useSelector((state) => state.counter);
   console.log(categoryItemstate);
   const { payload } = categoryItemstate;
@@ -33,6 +35,8 @@ const BuyModal = () => {
       });
       if (res) {
         dispatch(buyModalHide());
+        router.push('/')
+        router.reload()
       }
     } catch (err) {
       console.log(err);
