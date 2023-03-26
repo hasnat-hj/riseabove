@@ -11,10 +11,9 @@ import axiosInstance from '../../utils/axiosInterceptor';
 
 const BuyModal = () => {
   const { buyModal, categoryItemstate } = useSelector((state) => state.counter);
+  console.log(categoryItemstate);
   const { payload } = categoryItemstate;
-  const base64String = btoa(
-    String.fromCharCode(...new Uint8Array(payload?.img?.data?.data))
-  );
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
@@ -128,7 +127,7 @@ const BuyModal = () => {
                 <figure className="mr-5 self-start">
                   <Image
                     // src="/images/avatars/avatar_2.jpg"
-                    src={`data:image/png;base64,${base64String}`}
+                    src={payload?.img}
                     alt="avatar 2"
                     className="rounded-2lg"
                     loading="lazy"

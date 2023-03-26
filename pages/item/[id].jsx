@@ -16,8 +16,7 @@ import { loadContracts } from "../../contractABI/interact";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { bidsModalShow } from "../../redux/counterSlice";
-
+import { buyModalShow, setCategoryItem } from "../../redux/counterSlice";
 
 const Item = () => {
   const [imageModal, setImageModal] = useState(false);
@@ -39,7 +38,7 @@ const Item = () => {
 
   const loadItem = async () => {
     const result = await axiosInstance
-      .get(`/Anft/getAuctionNft/${router.query.id}`)
+      .get(`/nft/getNft/${router.query.id}`)
       .catch((err) => console.log(err, "it has an error"));
 
     console.log(result);
@@ -51,11 +50,7 @@ const Item = () => {
     setCreator(result.data.creator)
 
 
-    const result2 = await axiosInstance
-    .get(`/Anft/auctionBidHighest/${router.query.id}`)
-    .catch((err) => console.log(err, "it has an error"));
-    console.log(result2)
-    setHighestBid(result2.data)
+  
   };
 
  
@@ -89,7 +84,7 @@ await loadItem(router.query.id);
     <>
       <Meta title={`${pid} || Blenny | NFT Marketplace Next.js Template`} />
       {/*  <!-- Item --> */}
-     {item&& <section className="relative lg:mt-24 lg:pt-24 lg:pb-24 mt-24 pt-12 pb-24">
+     {item&& <section style={{minHeight:"100vh"}} className="relative lg:mt-24 lg:pt-24 lg:pb-24 mt-24 pt-12 pb-24">
         <picture className="pointer-events-none absolute inset-0 -z-10 dark:hidden">
           <img
             src="/images/gradient_light.jpg"
@@ -185,26 +180,7 @@ await loadItem(router.query.id);
                 {item?.name}
               </h1>
 
-              <div className="mb-8 flex items-center space-x-4 whitespace-nowrap">
-                <div className="flex items-center">
-                  <Tippy content={<span>Matic</span>}>
-                    <span className="-ml-1">
-                      <svg className="icon mr-1 h-4 w-4">
-                        <use xlinkHref="/icons.svg#icon-ETH"></use>
-                      </svg>
-                    </span>
-                  </Tippy>
-                  <span className="text-green text-sm font-medium tracking-tight">
-                    {item?.minbid} matic
-                  </span>
-                </div>
-                <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
-                 Price
-                </span>
-                <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
-                  1/1 available
-                </span>
-              </div>
+          
 
               <p className="dark:text-jacarta-300 mb-10">{item?.description}</p>
 
@@ -297,7 +273,7 @@ await loadItem(router.query.id);
                   <div className="sm:w-1/2 sm:pr-4 lg:pr-8">
                     <div className="block overflow-hidden text-ellipsis whitespace-nowrap">
                       <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
-                        Highest bid by{" "}
+                        Price
                       </span>
                       <Link href={"/user/"+highestBid.address}>
                         <a className="text-accent text-sm font-bold">
@@ -306,19 +282,7 @@ await loadItem(router.query.id);
                       </Link>
                     </div>
                     <div className="mt-3 flex">
-                      <figure className="mr-4 shrink-0">
-                        <Link href="#">
-                          <a className="relative block">
-                            <img
-                             src={highestBid&&highestBid.user.profileImage?highestBid.user.profileImage:"/images/user/user_avatar.gif"}
-												
-                              alt="avatar"
-                              className="rounded-2lg h-12 w-12"
-                              loading="lazy"
-                            />
-                          </a>
-                        </Link>
-                      </figure>
+                     
                       <div>
                         <div className="flex items-center whitespace-nowrap">
                           <Tippy content={<span>Matic</span>}>
@@ -328,31 +292,33 @@ await loadItem(router.query.id);
                             </span>
                           </Tippy>
                           <span className="text-green text-lg font-medium leading-tight tracking-tight">
-                            {item?.curbid} Matic
+                            {item?.price} Matic
                           </span>
                         </div>
-                        <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
-                          ~10,864.10
-                        </span>
+                      
                       </div>
                     </div>
                   </div>
 
                   {/* <!-- Countdown --> */}
                   <div className="dark:border-jacarta-600 sm:border-jacarta-100 mt-4 sm:mt-0 sm:w-1/2 sm:border-l sm:pl-4 lg:pl-8">
-                    <span className="js-countdown-ends-label text-jacarta-400 dark:text-jacarta-300 text-sm">
-                      Auction ends in
-                    </span>
-                    <Items_Countdown_timer time={+item?.createdAt} />
+                   
+                    <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
+                  1/1 available
+                </span>
                   </div>
                 </div>
 
-              {address==item.owner?<h1>Nft Created by you</h1>
+              {address==item.owner?<h1>Nft Owned by you</h1>
               :    <button
                     className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block w-full rounded-full py-3 px-8 text-center font-semibold text-white transition-all"
-            onClick={() =>dispatch(bidsModalShow(item))}
+            onClick={() =>{
+              dispatch(buyModalShow());
+              dispatch(setCategoryItem(item));
+            }
+              }
                   >
-                    Place Bid
+                   Buy
                   </button>}
               </div>
               {/* <!-- end bid --> */}
@@ -360,12 +326,8 @@ await loadItem(router.query.id);
             {/* <!-- end details --> */}
             
           </div>
-        {item&&  <ItemsTabs   item={item}/>}
         </div>
       </section>}
-      {/* <!-- end item --> */}
-
-      <More_items />
     </>
   );
 };

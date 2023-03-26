@@ -8,6 +8,7 @@ import { buyModalShow, setCategoryItem } from "../../redux/counterSlice";
 import { getItem } from "../../utils/localStorage";
 import Auctions_dropdown from "../dropdown/Auctions_dropdown";
 import Likes from "../likes";
+import Link from "next/link";
 
 const CategoryItem = () => {
   const { sortedtrendingCategoryItemData, buyModal, trendingCategoryItemData } =
@@ -41,7 +42,7 @@ const CategoryItem = () => {
           <article key={id}>
             <div className="dark:bg-jacarta-700 dark:border-jacarta-700 border-jacarta-100 rounded-2.5xl block border bg-white p-[1.1875rem] transition-shadow hover:shadow-lg">
               <figure className="relative">
-                {/* <Link href={`/item/${itemLink}`}> */}
+                <Link href={`/item/${item._id}`}>
                 <a>
                   <img
                     // src={image}
@@ -50,7 +51,7 @@ const CategoryItem = () => {
                     className="w-full h-[230px] rounded-[0.625rem] object-cover"
                   />
                 </a>
-                {/* </Link> */}
+                </Link>
 
                 {/* <Likes like={likes} /> */}
                 <Likes like={0} />
@@ -97,7 +98,7 @@ const CategoryItem = () => {
                 {/* </Link> */}
 
                 {/* auction dropdown  */}
-                <Auctions_dropdown classes="dark:hover:bg-jacarta-600 dropup hover:bg-jacarta-100 rounded-full" />
+                {/* <Auctions_dropdown classes="dark:hover:bg-jacarta-600 dropup hover:bg-jacarta-100 rounded-full" /> */}
               </div>
               <div className="mt-2 text-sm">
                 <span className="dark:text-jacarta-200 text-jacarta-700 mr-1">

@@ -12,7 +12,7 @@ const Home_1 = () => {
     <>
       <Meta title="Home  || Riseabove | NFT Marketplace Next.js Template" />
       <Hero />
-      <Bids />
+      {/* <Bids /> */}
       <Top_collection />
       <Tranding_category />
       <NewseLatter />
