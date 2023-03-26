@@ -2,7 +2,7 @@
 const nextConfig = {
 	productionBrowserSourceMaps: true,
 	images: {
-		domains: ['localhost:3000'],
+		domains: ['localhost:3000',"res.cloudinary.com"],
 	  },
 	
 };

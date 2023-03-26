@@ -118,7 +118,7 @@ const Create = () => {
         await mint.wait();
         console.log({ mint });
 
-        let id = await nft.tokenCount();
+        let id = await nft.makeItem();
         id = parseInt(id);
         // console.log("id", id);
 
@@ -217,6 +217,7 @@ const Create = () => {
         const makeItem = await (
           await marketplace.makeItem(nft.address, id, itemPrice)
         ).wait();
+        console.log(makeItem,"makeitem.........")
         console.log("makeItem: ", makeItem.events[2].args);
 
         // Fixed price API, kindly cross check the api if it's working fine or not
@@ -226,7 +227,7 @@ const Create = () => {
           // this if condition will be changed later
           console.log("create call with id");
           const formData = new FormData();
-          formData.append("id", id);
+          formData.append("id", makeItem.events[2].args.itemId);
           formData.append("name", input.name);
           formData.append("description", input.description);
           formData.append("price", input.price);
@@ -234,7 +235,7 @@ const Create = () => {
           formData.append("isBuy", false);
           formData.append("owner", address);
           formData.append("category", input.category);
-          formData.append("saleType", input.type);
+          // formData.append("saleType", input.type);
           console.log({ formData }, input.image);
           const res = await axiosInstance.post("/nft/createNft", formData, {});
 
@@ -445,7 +446,7 @@ const Create = () => {
               />
             </div>
             {/* <!-- Collection --> */}
-            <div className="relative">
+            {/* <div className="relative">
               <div>
                 <label className="font-display text-jacarta-700 mb-2 block dark:text-white">
                   Collection
@@ -479,7 +480,6 @@ const Create = () => {
                 </div>
               </div>
 
-              {/* dropdown */}
               <div className="dropdown my-1 cursor-pointer">
                 <Collection_dropdown2
                   data={collectionDropdown2_data}
@@ -488,8 +488,7 @@ const Create = () => {
                   Get_Value={Get_collection_Value}
                 />
               </div>
-            </div>
-            {/* <!-- Properties --> */}
+            </div> */}
             {popupItemData.map(({ id, name, text, icon }) => {
               return (
                 <div
@@ -531,30 +530,9 @@ const Create = () => {
             <Proparties_modal />
             {/* <!-- Properties --> */}
             {/* <!-- Unlockable Content --> */}
-            <div className="dark:border-jacarta-600 border-jacarta-100 relative border-b py-6">
+            {/* <div className="dark:border-jacarta-600 border-jacarta-100 relative border-b py-6">
               <div className="flex items-center justify-between">
-                <div className="flex">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    width="24"
-                    height="24"
-                    className="fill-accent mr-2 mt-px h-4 w-4 shrink-0"
-                  >
-                    <path fill="none" d="M0 0h24v24H0z" />
-                    <path d="M7 10h13a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V11a1 1 0 0 1 1-1h1V9a7 7 0 0 1 13.262-3.131l-1.789.894A5 5 0 0 0 7 9v1zm-2 2v8h14v-8H5zm5 3h4v2h-4v-2z" />
-                  </svg>
-
-                  <div>
-                    <label className="font-display text-jacarta-700 block dark:text-white">
-                      Unlockable Content
-                    </label>
-                    <p className="dark:text-jacarta-300">
-                      Include unlockable content that can only be revealed by
-                      the owner of the item.
-                    </p>
-                  </div>
-                </div>
+            
                 <input
                   value={input.Unlockable_Content}
                   onChange={() => {
@@ -568,9 +546,8 @@ const Create = () => {
                   className="checked:bg-accent checked:focus:bg-accent checked:hover:bg-accent after:bg-jacarta-400 bg-jacarta-100 relative h-6 w-[2.625rem] cursor-pointer appearance-none rounded-full border-none after:absolute after:top-[0.1875rem] after:left-[0.1875rem] after:h-[1.125rem] after:w-[1.125rem] after:rounded-full after:transition-all checked:bg-none checked:after:left-[1.3125rem] checked:after:bg-white focus:ring-transparent focus:ring-offset-0"
                 />{" "}
               </div>
-            </div>
-            {/* <!-- Explicit & Sensitive Content --> */}
-            <div className="dark:border-jacarta-600 border-jacarta-100 relative mb-6 border-b py-6">
+            </div> */}
+            {/* <div className="dark:border-jacarta-600 border-jacarta-100 relative mb-6 border-b py-6">
               <div className="flex items-center justify-between">
                 <div className="flex">
                   <svg
@@ -631,7 +608,7 @@ const Create = () => {
                   className="checked:bg-accent checked:focus:bg-accent checked:hover:bg-accent after:bg-jacarta-400 bg-jacarta-100 relative h-6 w-[2.625rem] cursor-pointer appearance-none rounded-full border-none after:absolute after:top-[0.1875rem] after:left-[0.1875rem] after:h-[1.125rem] after:w-[1.125rem] after:rounded-full after:transition-all checked:bg-none checked:after:left-[1.3125rem] checked:after:bg-white focus:ring-transparent focus:ring-offset-0"
                 />
               </div>
-            </div>
+            </div> */}
             {/* Category */}
             <div className="relative">
               <div>
@@ -715,13 +692,13 @@ const Create = () => {
               </div>
             </div>
             {/* <!-- Select type auction or fixed price --> */}
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <div className="mb-2 flex items-center space-x-2">
                 <label
                   htmlFor="item-freeze-metadata"
                   className="font-display text-jacarta-700 block dark:text-white"
                 >
-                  {/* Freeze metadata */} Select Type
+           Select Type
                 </label>
               </div>
               <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -776,7 +753,7 @@ const Create = () => {
                   </div>
                 </li>
               </ul>
-            </div>
+            </div> */}
 
             {/* FReeze MetaData */}
             <div className="mb-6">

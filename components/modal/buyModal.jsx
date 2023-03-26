@@ -8,13 +8,14 @@ import btoa from 'btoa';
 import { loadContracts } from '../../contractABI/interact.js';
 import { buyModalHide } from '../../redux/counterSlice';
 import axiosInstance from '../../utils/axiosInterceptor';
+import { useRouter } from 'next/router.js';
 
 const BuyModal = () => {
+  const router = useRouter();
   const { buyModal, categoryItemstate } = useSelector((state) => state.counter);
+  console.log(categoryItemstate);
   const { payload } = categoryItemstate;
-  const base64String = btoa(
-    String.fromCharCode(...new Uint8Array(payload?.img?.data?.data))
-  );
+
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({
@@ -34,6 +35,8 @@ const BuyModal = () => {
       });
       if (res) {
         dispatch(buyModalHide());
+        router.push('/')
+        router.reload()
       }
     } catch (err) {
       console.log(err);
@@ -42,21 +45,23 @@ const BuyModal = () => {
 
   const buyMarketItem = async () => {
     const { marketplace, nft, address, status } = await loadContracts();
-    console.log({ marketplace });
-
-    console.log({ payload });
+    console.log(address)
+    console.log({ marketplace },"marketplace");
+const id=parseInt(payload?.id);
+    console.log(payload,id);
     try {
       setLoading(true);
-      console.log("a;;", payload);
+      console.log("paload", payload);
       // console.log("items", marketplace.items());
-      const totalPrice = await marketplace.getTotalPrice(payload?.id);
+      const totalPrice = await marketplace.getTotalPrice(id);
       console.log(totalPrice);
 
       await (
-        await marketplace.purchaseItem(payload?.id, {
+        await marketplace.purchaseItem(id, {
           value: totalPrice
         })
       ).wait();
+      console.log(status,"Buy Status")
       setSuccess({
         status: status,
         message: "Successfully Purchase NFT"
@@ -128,7 +133,7 @@ const BuyModal = () => {
                 <figure className="mr-5 self-start">
                   <Image
                     // src="/images/avatars/avatar_2.jpg"
-                    src={`data:image/png;base64,${base64String}`}
+                    src={payload?.img}
                     alt="avatar 2"
                     className="rounded-2lg"
                     loading="lazy"
