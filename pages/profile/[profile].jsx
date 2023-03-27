@@ -108,7 +108,7 @@ const Edit_user = () => {
   const handleProfile = async e => {
     e.preventDefault();
     console.log("call");
-    if ((profilePhoto || preview) && (coverPhoto || coverPreview) && user.email && user.username && user.bio) {
+    if (user.email && user.username && user.bio) {
       console.log(profilePhoto, coverPhoto, user);
       setStatus({
         type: "",

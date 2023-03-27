@@ -45,14 +45,11 @@ const BuyModal = () => {
 
   const buyMarketItem = async () => {
     const { marketplace, nft, address, status } = await loadContracts();
-    console.log(address)
-    console.log({ marketplace },"marketplace");
 const id=parseInt(payload?.id);
     console.log(payload,id);
     try {
       setLoading(true);
       console.log("paload", payload);
-      // console.log("items", marketplace.items());
       const totalPrice = await marketplace.getTotalPrice(id);
       console.log(totalPrice);
 
@@ -66,7 +63,6 @@ const id=parseInt(payload?.id);
         status: status,
         message: "Successfully Purchase NFT"
       });
-      // console.log("response called", res);
       removeFromMarketplace(payload?._id, address);
       toast.success("Successfully bought NFT!");
     } catch (err) {
@@ -82,13 +78,8 @@ const id=parseInt(payload?.id);
 
     console.log(status);
   };
-
-  //   const base64String = btoa(
-  // 	String.fromCharCode(...new Uint8Array(payload.img.data.data))
-  //   );
   console.log(payload);
 
-  //console.log('categoryItemstate',categoryItemstate.payload)
 
   return (
     <div>
