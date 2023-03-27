@@ -110,7 +110,7 @@ const CategoryItem = () => {
               </div>
 
               <div className="mt-8 flex items-center justify-between">
-                {item.owner !== getItem("userAddress") && (
+                {item.owner?.address !== getItem("userAddress") ?
                   <button
                     className="text-accent font-display text-sm font-semibold"
                     onClick={() => {
@@ -120,7 +120,8 @@ const CategoryItem = () => {
                   >
                     Buy now
                   </button>
-                )}{" "}
+                :
+                <div><h1>Owned</h1></div>}
                 {/* <Link href={`/item/${itemLink}`}> */}
                 <a className="group flex items-center">
                   <svg className="icon icon-history group-hover:fill-accent dark:fill-jacarta-200 fill-jacarta-500 mr-1 mb-[3px] h-4 w-4">

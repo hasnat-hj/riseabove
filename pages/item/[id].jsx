@@ -24,7 +24,7 @@ const Item = () => {
   const [owner, setOwner] = useState();
   const [creator, setCreator] = useState();
   const [itemImage, setItemImage] = useState();
-  const [address,setAddress]=useState(false)
+  const [address,setAddress]=useState(localStorage.getItem("userAddress"))
   const [highestBid,setHighestBid]=useState(false)
   const dispatch = useDispatch();
  
@@ -62,8 +62,6 @@ const Item = () => {
     
 // setAddress(getAddress())
 (async()=>{
-console.log("helo..............................................")
-setAddress(await getAddress());
 await loadItem(router.query.id);
 })()
       setId(router.query.id)
@@ -75,6 +73,7 @@ await loadItem(router.query.id);
 
   const getAddress=async()=>{
     const {address } = await loadContracts();
+    console.log(address,"address");
     return address
   }
   // console.log({item},{user},userImage ,itemImage)
@@ -275,11 +274,7 @@ await loadItem(router.query.id);
                       <span className="dark:text-jacarta-300 text-jacarta-400 text-sm">
                         Price
                       </span>
-                      <Link href={"/user/"+highestBid.address}>
-                        <a className="text-accent text-sm font-bold">
-                          {highestBid.address}
-                        </a>
-                      </Link>
+                    
                     </div>
                     <div className="mt-3 flex">
                      
@@ -309,7 +304,7 @@ await loadItem(router.query.id);
                   </div>
                 </div>
 
-              {address==item.owner?<h1>Nft Owned by you</h1>
+              {address==owner.address?<h1>Nft Owned by you</h1>
               :    <button
                     className="bg-accent shadow-accent-volume hover:bg-accent-dark inline-block w-full rounded-full py-3 px-8 text-center font-semibold text-white transition-all"
             onClick={() =>{
