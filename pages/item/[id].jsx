@@ -17,6 +17,7 @@ import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { buyModalShow, setCategoryItem } from "../../redux/counterSlice";
+import { getItem } from "../../utils/localStorage";
 
 const Item = () => {
   const [imageModal, setImageModal] = useState(false);
@@ -24,7 +25,7 @@ const Item = () => {
   const [owner, setOwner] = useState();
   const [creator, setCreator] = useState();
   const [itemImage, setItemImage] = useState();
-  const [address,setAddress]=useState(localStorage.getItem("userAddress"))
+  const [address,setAddress]=useState(getItem("userAddress"))
   const [highestBid,setHighestBid]=useState(false)
   const dispatch = useDispatch();
  
