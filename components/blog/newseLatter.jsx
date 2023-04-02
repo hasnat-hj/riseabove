@@ -2,8 +2,11 @@ import React from 'react';
 import HeadLine from '../headLine';
 import { newseLatterData } from '../../data/newseLatterData';
 import Image from 'next/image';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
 
 const NewseLatter = ({ bgWhite = true }) => {
+const [email,setEmail]=useState("")
 	return (
 		<section className="dark:bg-jacarta-800 relative py-24">
 			{bgWhite && (
@@ -51,8 +54,17 @@ const NewseLatter = ({ bgWhite = true }) => {
 				</p>
 
 				<div className="mx-auto mt-7 max-w-md text-center">
-					<form className="relative" onSubmit={(e) => e.preventDefault()}>
+					<form className="relative" onSubmit={(e) =>{
+						 e.preventDefault()
+					toast.success("Subscribed successfully News Emails")
+					setEmail("")
+					}
+					
+					}>
 						<input
+						required
+						value={email}
+						onChange={(e)=>setEmail(e.target.value)}
 							type="email"
 							placeholder="Email address"
 							className="dark:bg-jacarta-700 dark:border-jacarta-600 focus:ring-accent border-jacarta-100 w-full rounded-full border py-3 px-4 dark:text-white dark:placeholder-white"

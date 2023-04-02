@@ -33,28 +33,32 @@ const User = () => {
 	};
 	console.log(router.query.user);
 	useEffect(() => {
-		if (router.query.user) {
-		axiosInstance
-			.get(`/user/profile/${router.query.user}`)
-			.then(res => {
-				console.log(res);
-				setUser(res?.data?.user);
-				if (res?.data?.user?.coverImage) {
-					const base64String = btoa(
-						String.fromCharCode(...new Uint8Array(res.data.user.coverImage.data.data))
-					);
-					setCoverPreview(`data:image/png;base64,${base64String}`);
-				}
-				if (res?.data.user?.profileImage) {
-					const base64String = btoa(
-						String.fromCharCode(...new Uint8Array(res.data.user.profileImage.data.data))
-					);
-				
-					setProfilePreview(`data:image/png;base64,${base64String}`);
-				}
-			}).catch(err => console.log(err));
-		}
+		if (router.isReady&&router.query.user) 
+		fetchData()
+		
 	}, []);
+	useEffect(() => {
+		if (router.isReady&&router.query.user) 
+		fetchData()
+		
+	}, [router]);
+	function fetchData(){
+			axiosInstance
+				.get(`/user/profile/${router.query.user}`)
+				.then(res => {
+					console.log(res);
+					setUser(res?.data?.user);
+					if (res?.data?.user?.coverImage) {
+				
+						setCoverPreview(res?.data.user?.coverImage);
+					}
+					
+					if (res?.data?.user?.profileImage)
+						setProfilePreview(res?.data.user?.profileImage);
+					
+				}).catch(err => console.log(err));
+			
+	}
 	console.log("user", user);
 	useEffect(() => {
 
